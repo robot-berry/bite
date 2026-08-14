@@ -8,4 +8,6 @@
 
 ## 获取 APK
 
-在 GitHub 仓库的 Actions 页面打开最新一次 `Build Android APK`，下载 `qinghe-account-apk` 构建产物，解压后安装 `app-debug.apk`。
+直接下载并安装：[Qinghe-Account.apk](https://robot-berry.github.io/bite/downloads/Qinghe-Account.apk)。安卓首次安装时可能需要允许浏览器“安装未知应用”。
+
+发布包使用本地生成的独立签名，私钥位于本机构建目录且被 `.gitignore` 排除，不会上传 GitHub。

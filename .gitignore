@@ -1,0 +1,5 @@
+.android-build-tools/
+.apk-package-inspect/
+release-key/
+*.full.zip
+Qinghe-Android-Package.zip

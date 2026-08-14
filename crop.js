@@ -110,8 +110,8 @@
     if (window.Android && typeof window.Android.openApp === 'function') {
       window.Android.openApp(kind);
     } else {
-      toast(`请打开${name}，进入账单页面截图后再返回`);
-      setTimeout(() => { location.href = kind === 'wechat' ? 'weixin://' : 'alipays://platformapi/startapp'; }, 600);
+      toast(`请在${name}中进入账单页面，截图后再返回`);
+      location.href = kind === 'wechat' ? 'weixin://' : 'alipays://platformapi/startapp';
     }
   }
   document.querySelector('#openWechat').onclick=()=>launch('wechat');
