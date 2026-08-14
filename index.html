@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#153f37" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>青禾记账</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div><p class="eyebrow" id="todayLabel"></p><h1>青禾记账</h1></div>
+      <button class="icon-btn" id="installBtn" hidden aria-label="安装应用">安装</button>
+    </header>
+
+    <section id="homePage" class="page active">
+      <article class="balance-card">
+        <p>本月结余</p><strong id="monthBalance">¥0.00</strong>
+        <div class="balance-row"><span>收入 <b id="monthIncome">¥0</b></span><span>支出 <b id="monthExpense">¥0</b></span></div>
+      </article>
+      <div class="quick-grid">
+        <button class="quick primary" id="scanBtn"><span>▣</span><b>截图记账</b><small>上传支付截图自动识别</small></button>
+        <button class="quick" id="manualBtn"><span>＋</span><b>手动记账</b><small>快速添加一笔收支</small></button>
+      </div>
+      <div class="section-head"><h2>最近记录</h2><button class="text-btn" data-go="records">查看全部</button></div>
+      <div id="recentList" class="transaction-list"></div>
+    </section>
+
+    <section id="statsPage" class="page">
+      <div class="section-head"><div><p class="eyebrow">数据洞察</p><h2>收支统计</h2></div></div>
+      <div class="period-tabs" id="periodTabs"><button data-period="day">日</button><button data-period="week">周</button><button class="active" data-period="month">月</button></div>
+      <article class="stat-card"><p id="periodTitle">本月支出</p><strong id="periodExpense">¥0.00</strong><div class="chart-wrap"><canvas id="trendChart"></canvas></div></article>
+      <article class="stat-card"><div class="section-head"><h3>分类占比</h3><span id="categoryTotal"></span></div><div class="donut-layout"><canvas id="donutChart"></canvas><div id="categoryLegend" class="legend"></div></div></article>
+    </section>
+
+    <section id="recordsPage" class="page">
+      <div class="section-head"><div><p class="eyebrow">每一笔都清楚</p><h2>全部记录</h2></div><button class="text-btn danger" id="clearBtn">清空</button></div>
+      <div id="allList" class="transaction-list"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav"><button class="active" data-page="home"><span>⌂</span>首页</button><button data-page="stats"><span>◔</span>统计</button><button data-page="records"><span>≡</span>明细</button></nav>
+  <input type="file" id="imageInput" accept="image/*" capture="environment" hidden />
+
+  <dialog id="entryDialog">
+    <form method="dialog" id="entryForm">
+      <div class="dialog-head"><div><p class="eyebrow" id="dialogEyebrow">新增记录</p><h2 id="dialogTitle">记一笔</h2></div><button value="cancel" class="close-btn" aria-label="关闭">×</button></div>
+      <div id="scanStatus" class="scan-status" hidden></div>
+      <div class="type-toggle"><button type="button" data-type="expense" class="active">支出</button><button type="button" data-type="income">收入</button></div>
+      <label>金额<div class="money-input"><span>¥</span><input id="amount" inputmode="decimal" required placeholder="0.00" /></div></label>
+      <label>分类<select id="category"></select></label>
+      <label>商家 / 备注<input id="note" maxlength="40" placeholder="例如：午餐" /></label>
+      <label>日期<input id="date" type="datetime-local" required /></label>
+      <button class="submit-btn" value="default">保存记录</button>
+    </form>
+  </dialog>
+  <div id="toast" class="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
