@@ -8,6 +8,9 @@
   <title>青禾记账</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .bill-launcher{display:flex;justify-content:space-between;align-items:center;gap:14px;background:white;padding:16px;border-radius:19px;margin:-16px 0 28px}.bill-launcher h3{margin:0 0 4px;font-size:16px}.bill-launcher small{color:var(--muted);font-size:11px}.bill-actions{display:flex;gap:7px}.bill-actions button{border:0;border-radius:12px;padding:10px 11px;background:var(--mint);color:var(--green)}.bill-actions b,.bill-actions span{display:block}.bill-actions span{font-size:10px;margin-top:2px}.crop-dialog{background:#10231f;color:white;max-width:520px}.crop-panel{padding:20px}.crop-panel h2{margin-bottom:0}.crop-panel .close-btn{color:white}.crop-tip{font-size:12px;color:#c8d4d0;line-height:1.5}.crop-stage{height:min(52vh,480px);position:relative;overflow:hidden;background:#07110f;border-radius:16px;touch-action:none}.crop-stage canvas{width:100%;height:100%;display:block}.crop-frame{position:absolute;inset:8%;border:2px solid var(--orange);box-shadow:0 0 0 999px #0007;pointer-events:none}.zoom-row{display:flex;align-items:center;gap:12px;color:white}.zoom-row input{padding:0;margin:0}.crop-tools{display:flex;gap:8px}.crop-tools button{flex:1;border:1px solid #ffffff35;background:#ffffff12;color:white;border-radius:11px;padding:10px}.crop-dialog .submit-btn{background:var(--orange)}
+  </style>
 </head>
 <body>
   <main class="app-shell">
@@ -25,6 +28,10 @@
         <button class="quick primary" id="scanBtn"><span>▣</span><b>账单截图记账</b><small>从相册选择微信或支付宝截图</small></button>
         <button class="quick" id="manualBtn"><span>＋</span><b>手动记账</b><small>快速添加一笔收支</small></button>
       </div>
+      <article class="bill-launcher">
+        <div><p class="eyebrow">先去找账单</p><h3>打开支付应用</h3><small>查看账单并截图，再返回这里识别</small></div>
+        <div class="bill-actions"><button id="openWechat"><b>微信</b><span>打开</span></button><button id="openAlipay"><b>支付宝</b><span>打开</span></button></div>
+      </article>
       <div class="section-head"><h2>最近记录</h2><button class="text-btn" data-go="records">查看全部</button></div>
       <div id="recentList" class="transaction-list"></div>
     </section>
@@ -57,8 +64,19 @@
       <button class="submit-btn" value="default">保存记录</button>
     </form>
   </dialog>
+  <dialog id="cropDialog" class="crop-dialog">
+    <div class="crop-panel">
+      <div class="dialog-head"><div><p class="eyebrow">图片二次处理</p><h2>裁剪账单截图</h2></div><button class="close-btn" id="cancelCrop" aria-label="取消">×</button></div>
+      <p class="crop-tip">拖动图片调整位置，双指或滑杆缩放；橙色框内是识别区域。</p>
+      <div class="crop-stage" id="cropStage"><canvas id="cropCanvas"></canvas><div class="crop-frame"></div></div>
+      <label class="zoom-row">缩放<input id="cropZoom" type="range" min="1" max="4" step="0.01" value="1" /></label>
+      <div class="crop-tools"><button id="rotateLeft">↶ 左转</button><button id="rotateRight">↷ 右转</button><button id="resetCrop">重置</button></div>
+      <button class="submit-btn" id="confirmCrop">使用裁剪图片并识别</button>
+    </div>
+  </dialog>
   <div id="toast" class="toast"></div>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <script src="app.js"></script>
+  <script src="crop.js"></script>
 </body>
 </html>
