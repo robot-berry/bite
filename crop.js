@@ -106,7 +106,8 @@
 
   function launch(kind) {
     const name = kind === 'wechat' ? '微信' : '支付宝';
-    if (!confirm(`即将打开${name}。\n\n本应用不会读取你的账号、密码或账单数据。请在${name}中打开账单并截图，然后返回本应用选择截图。是否继续？`)) return;
+    const route = kind === 'wechat' ? '我 → 服务 → 钱包 → 账单' : '我的 → 账单';
+    if (!confirm(`即将打开${name}。\n\n账单入口：${route}\n\n本应用不会读取你的账号、密码或账单数据。请打开账单并截图，然后返回本应用选择截图。是否继续？`)) return;
     if (window.Android && typeof window.Android.openApp === 'function') {
       window.Android.openApp(kind);
     } else {
