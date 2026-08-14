@@ -22,7 +22,7 @@
         <div class="balance-row"><span>收入 <b id="monthIncome">¥0</b></span><span>支出 <b id="monthExpense">¥0</b></span></div>
       </article>
       <div class="quick-grid">
-        <button class="quick primary" id="scanBtn"><span>▣</span><b>截图记账</b><small>上传支付截图自动识别</small></button>
+        <button class="quick primary" id="scanBtn"><span>▣</span><b>账单截图记账</b><small>从相册选择微信或支付宝截图</small></button>
         <button class="quick" id="manualBtn"><span>＋</span><b>手动记账</b><small>快速添加一笔收支</small></button>
       </div>
       <div class="section-head"><h2>最近记录</h2><button class="text-btn" data-go="records">查看全部</button></div>
@@ -43,7 +43,7 @@
   </main>
 
   <nav class="bottom-nav"><button class="active" data-page="home"><span>⌂</span>首页</button><button data-page="stats"><span>◔</span>统计</button><button data-page="records"><span>≡</span>明细</button></nav>
-  <input type="file" id="imageInput" accept="image/*" capture="environment" hidden />
+  <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp" hidden />
 
   <dialog id="entryDialog">
     <form method="dialog" id="entryForm">
