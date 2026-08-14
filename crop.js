@@ -1,4 +1,4 @@
-// Safe payment-app launcher and local screenshot editor.
+// Safe payment-app launcher and local screenshot editor. APK build 1.
 (() => {
   const input = document.querySelector('#imageInput');
   const dialog = document.querySelector('#cropDialog');
